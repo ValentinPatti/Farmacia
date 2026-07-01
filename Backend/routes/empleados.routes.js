@@ -4,12 +4,11 @@ const verificacionToken = require('../middlewares/auth.middlewares.js')
 const verificarRol = require('../middlewares/rol.middleware.js')
 const empleadoController = require("../controllers/empleadoController.js");
 
-router.use(verificacionToken)
+//router.use(verificacionToken)
 
-router.post("/", verificarRol("administrador"),empleadoController.crearEmpleado);
-router.get("/", verificarRol("administrador"),empleadoController.mostrarEmpleados);
-router.get("/:dni", verificarRol("administrador"),empleadoController.mostrarEmpleadoPorDni);
-router.patch("/:id", verificarRol("administrador"),empleadoController.actualizarEmpleado);
-router.delete("/:id", verificarRol("administrador"),empleadoController.eliminarEmpleado);
+router.post("/",empleadoController.crearEmpleado);
+router.get("/",empleadoController.mostrarEmpleados);
+router.patch("/:id",empleadoController.actualizarEmpleado);
+router.delete("/:id",empleadoController.eliminarEmpleado);
 
 module.exports = router;
