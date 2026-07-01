@@ -21,6 +21,12 @@ const crearCompra = async (req, res) => {
             fecha
     ]);
 
+        await pool.query(
+            `UPDATE medicamentos
+            SET stock = stock + ?
+            WHERE id_medicamento = ?`,
+            [cantidad, id_medicamento]
+);
         res.status(201).json({
             mensaje: "Compra registrada correctamente"
         });
@@ -83,6 +89,16 @@ const actualizarCompra = async (req, res) => {
             id
         ])
 
+        const nuevaCantidad = datos.cantidad ?? compra.cantidad;
+        const diferencia = nuevaCantidad - compra.cantidad;
+
+        await pool.query(
+            `UPDATE medicamentos
+            SET stock = stock + ?
+            WHERE id_medicamento = ?`,
+            [diferencia, compra.id_medicamento]
+        );
+
         res.status(200).json({
             mensaje: "Compra actualizada correctamente"
         });
@@ -97,14 +113,29 @@ const actualizarCompra = async (req, res) => {
 const eliminarCompra = async (req, res) => {
     try {
         const { id } = req.params;
-        const sql = `DELETE FROM compras WHERE id_compra = ?`;
-        const [resultado] = await pool.query(sql, [id])
 
-        if (resultado.affectedRows === 0) {
+        const [rows] = await pool.query(
+            "SELECT * FROM compras WHERE id_compra = ?",
+            [id]
+        );
+
+        if (rows.length === 0) {
             return res.status(404).json({
                 mensaje: "Compra no encontrada"
             });
         }
+
+        const compra = rows[0];
+
+        const sql = `DELETE FROM compras WHERE id_compra = ?`;
+        const [resultado] = await pool.query(sql, [id])
+
+       await pool.query(
+            `UPDATE medicamentos
+             SET stock = stock - ?
+             WHERE id_medicamento = ?`,
+            [compra.cantidad, compra.id_medicamento]
+        );
 
         res.status(200).json({
             mensaje: "Compra eliminada correctamente"

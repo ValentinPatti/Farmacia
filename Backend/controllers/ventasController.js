@@ -8,6 +8,25 @@ const crearVenta = async (req, res) => {
             return res.status(400).json({ mensaje: "Faltan campos" });
         }
 
+        const [rows] = await pool.query(
+        "SELECT stock FROM medicamentos WHERE id_medicamento = ?",
+        [id_medicamento]
+        );
+
+        if (rows.length === 0) {
+        return res.status(404).json({
+            mensaje: "Medicamento no encontrado"
+        });
+        }
+
+        const stockActual = rows[0].stock;
+
+        if (stockActual < cantidad) {
+            return res.status(400).json({
+                mensaje: "Stock insuficiente"
+            });
+        }
+
         const sql = `
         INSERT INTO ventas(id_empleado, id_medicamento, cantidad, precio_unitario, metodo_pago, precio_total, fecha)
         VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -22,6 +41,13 @@ const crearVenta = async (req, res) => {
         precio_total,
         fecha
         ]);
+
+        await pool.query(
+            `UPDATE medicamentos
+            SET stock = stock - ?
+            WHERE id_medicamento = ?`,
+            [cantidad, id_medicamento]
+        );
 
         res.status(201).json({
             mensaje: "Venta realizada correctamente"
@@ -88,6 +114,16 @@ const actualizarVenta = async (req, res) => {
         id
         ]);
 
+        const nuevaCantidad = datos.cantidad ?? venta.cantidad;
+        const diferencia = nuevaCantidad - venta.cantidad;
+
+        await pool.query(
+            `UPDATE medicamentos
+            SET stock = stock - ?
+            WHERE id_medicamento = ?`,
+            [diferencia, venta.id_medicamento]
+        );
+
         res.status(200).json({
             mensaje: "Venta actualizada correctamente"
         });
@@ -104,15 +140,29 @@ const actualizarVenta = async (req, res) => {
 const eliminarVenta = async (req, res) => {
     try {
         const { id } = req.params;
-        const sql = `DELETE FROM ventas WHERE id_venta = ?`;
 
-        const [resultado] = await pool.query(sql, [id])
+        const [rows] = await pool.query(
+            "SELECT * FROM ventas WHERE id_venta = ?",
+            [id]
+        );
 
-        if (resultado.affectedRows === 0) {
+        if (rows.length === 0) {
             return res.status(404).json({
-                mensaje: "Venta no encontrado"
+                mensaje: "Venta no encontrada"
             });
         }
+
+        const venta = rows[0];
+
+        const sql = `DELETE FROM ventas WHERE id_venta = ?`;
+        const [resultado] = await pool.query(sql, [id])
+
+        await pool.query(
+            `UPDATE medicamentos
+             SET stock = stock + ?
+             WHERE id_medicamento = ?`,
+            [venta.cantidad, venta.id_medicamento]
+        );
 
         res.status(200).json({
             mensaje: "Venta eliminada correctamente"
