@@ -4,11 +4,11 @@ const verificacionToken = require('../middlewares/auth.middlewares.js')
 const verificarRol = require('../middlewares/rol.middleware.js')
 const compraController = require("../controllers/comprasController.js");
 
-//router.use(verificacionToken)
+ verificarRol("Administrador"), router.use(verificacionToken)
 
-router.post("/",compraController.crearCompra);
-router.get("/",compraController.mostrarCompras);
-router.patch("/:id",compraController.actualizarCompra);
-router.delete("/:id",compraController.eliminarCompra);
+router.post("/", verificarRol("Administrador"), compraController.crearCompra);
+router.get("/", verificarRol("Administrador"), compraController.mostrarCompras);
+router.patch("/:id", verificarRol("Administrador"), compraController.actualizarCompra);
+router.delete("/:id", verificarRol("Administrador"), compraController.eliminarCompra);
 
 module.exports = router;
