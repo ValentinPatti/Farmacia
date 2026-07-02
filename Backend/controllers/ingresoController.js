@@ -98,12 +98,12 @@ const login = async (req, res) => {
 
     //generar token
 
-    const token = jwt.sign({ id: usuario.id, rol: usuario.rol }, process.env.SECRET_KEY, {
+    const token = jwt.sign({ id: empleado.id, rol: empleado.rol }, process.env.SECRET_KEY, {
       expiresIn: "10h",
     });
     //respondo con usuario logueado + token
-
-    res.status(200).json({ message: "Usuario logueado correctamente" , rol: usuario.rol, nombre: usuario.nombre});
+    console.log("Datos del usuario en el backend:", usuario)
+    res.status(200).json({ message: "Usuario logueado correctamente" , token, rol: empleado.rol, nombre: empleado.nombre});
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
