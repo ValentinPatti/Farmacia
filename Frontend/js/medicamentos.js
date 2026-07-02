@@ -77,14 +77,12 @@ function mostrarMedicamentos(medicamentos) {
 
         <tr>
 
+            <td>${medicamento.id_medicamento}</td>
+            <td>${medicamento.id_proveedor}</td>
             <td>${medicamento.nombre}</td>
-
             <td>$${medicamento.precio}</td>
-
             <td>${medicamento.stock}</td>
-
             <td>${new Date(medicamento.fecha_vencimiento).toLocaleDateString("es-AR")}</td>
-
             <td ${!esAdministrador() ? 'style="display:none;"' : ""}>
                 ${botones}
             </td>
@@ -100,9 +98,7 @@ const modalMedicamento = new bootstrap.Modal(
 );
 
 const formMedicamento = document.getElementById("formMedicamento");
-
 const btnGuardar = document.getElementById("btnGuardarMedicamento");
-
 const tituloModal = document.getElementById("tituloModal");
 
 // id del medicamento que se está editando
@@ -129,13 +125,9 @@ btnGuardar.addEventListener("click", guardarMedicamento);
 async function guardarMedicamento() {
   const medicamento = {
     id_proveedor: Number(document.getElementById("idProveedor").value),
-
     nombre: document.getElementById("nombre").value.trim(),
-
     precio: Number(document.getElementById("precio").value),
-
     stock: Number(document.getElementById("stock").value),
-
     fecha_vencimiento: document.getElementById("fechaVencimiento").value,
   };
 
