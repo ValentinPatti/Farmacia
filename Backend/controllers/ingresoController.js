@@ -34,7 +34,7 @@ const register = async (req, res) => {
 
     const insertoNuevoUsuario = `INSERT INTO empleados (nombre, apellido, dni, usuario, contrasena, rol, telefono) VALUES (?,?,?,?,?,?,?)`;
 
-    const [user] = await pool.query(insertoNuevoUsuario, [
+    const [empleado] = await pool.query(insertoNuevoUsuario, [
       nombre,
       apellido,
       dni,
@@ -46,13 +46,13 @@ const register = async (req, res) => {
 
     //generar un token
 
-    const token = jwt.sign({ id: user.insertId }, process.env.SECRET_KEY, {
+    const token = jwt.sign({ id: empleado.insertId, rol: rol }, process.env.SECRET_KEY, {
       expiresIn: "10h",
     });
 
     //usuario creado correctamente + token
 
-    res.status(201).json({ message: "Usuario creado correctamente" }, token);
+    res.status(201).json({ message: "Usuario creado correctamente" , token, rol, nombre});
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

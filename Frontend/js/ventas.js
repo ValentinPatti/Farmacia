@@ -97,7 +97,7 @@ let idEditar = null;
 //============================
 
 document.getElementById("btnNuevaVenta").addEventListener("click", () => {
-  if (!esAdministrador()) return;
+  // if (!esAdministrador()) return;
 
   idEditar = null;
 
@@ -113,7 +113,7 @@ document.getElementById("btnNuevaVenta").addEventListener("click", () => {
 btnGuardar.addEventListener("click", guardarVenta);
 
 async function guardarVenta() {
-  if (!esAdministrador()) return;
+  // if (!esAdministrador()) return;
 
   const venta = {
     id_empleado: Number(document.getElementById("idEmpleado").value),
@@ -265,7 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const btnNuevo = document.getElementById("btnNuevaVenta");
 
-  if (!esAdministrador()) {
-    btnNuevo.style.display = "none";
-  }
+  // if (!esAdministrador()) {
+  //   btnNuevo.style.display = "none";
+  // }
 });
