@@ -6,9 +6,9 @@ const clienteController = require("../controllers/clientesController.js");
 
 router.use(verificacionToken)
 
-router.post("/", verificarRol("Administrador", "Empleado"), clienteController.crearCliente);
-router.get("/", verificarRol("Administrador", "Empleado"), clienteController.mostrarClientes);
-router.patch("/:id", verificarRol("Administrador", "Empleado"), clienteController.actualizarCliente);
-router.delete("/:id", verificarRol("Administrador"), clienteController.eliminarCliente);
+router.post("/", verificarRol("administrador", "empleado"), clienteController.crearCliente);
+router.get("/", verificarRol("administrador", "empleado"), clienteController.mostrarClientes);
+router.patch("/:id", verificarRol("administrador", "empleado"), clienteController.actualizarCliente);
+router.delete("/:id", verificarRol("administrador"), clienteController.eliminarCliente);
 
 module.exports = router;
