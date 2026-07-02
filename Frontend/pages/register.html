@@ -26,21 +26,30 @@
       <div class="container d-flex justify-content-center mt-5">
         <div class="card p-4 shadow">
           <h4 class="text-center mb-3">Registrate</h4>
-          <form id="formLogin">
+          <form id="formRegister">
             <input
               type="text"
+              id="nombre"
               class="form-control mb-3"
               placeholder="Nombre"
+              maxlength="30"
+              required
             />
             <input
               type="text"
+              id="apellido"
               class="form-control mb-3"
               placeholder="Apellido"
+              maxlength="30"
+              required
             />
             <input
-              type="text"
+              type="number"
+              id="dni"
               class="form-control mb-3"
               placeholder="Dni"
+              maxlength="8"
+              required
             />
             <input
               type="text"
@@ -56,19 +65,22 @@
               id="contrasena"
               class="form-control mb-3"
               placeholder="Contraseña"
-              minlength="5"
+              minlength="4"
               maxlength="20"
               required
             />
             
-            <select class="form-select mb-3" aria-label="Disabled select example" disabled>
+            <select id="rol" class="form-select mb-3" aria-label="Disabled select example" >
             <option value="Empleado">Empleado</option>
+            <option value="Administrador">Administrador</option>
             </select>
 
             <input
-              type="text"
+              type="tel"
+              id="telefono"
               class="form-control mb-3"
               placeholder="Telefono"
+              required
             />
             <button type="submit" class="btn btn-success w-100" id="boton">
               Registrate
@@ -89,7 +101,8 @@
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
-    <script src=""></script>
-    <script src=""></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/register.js"></script>
   </body>
 </html>
