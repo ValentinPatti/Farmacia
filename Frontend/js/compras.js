@@ -10,7 +10,7 @@ function esAdministrador() {
 }
 
 //============================
-// OBTENER EMPLEADOS
+// OBTENER COMPRAS
 //============================
 
 async function cargarCompras() {
@@ -69,11 +69,13 @@ function mostrarCompras(compras) {
 
     tablaCompras.innerHTML += `
             <tr>
-
-                <td>${new Date(compra.fecha).toLocaleDateString("es-AR")}</td>
-
+                <td>${compra.id_compra}</td>
+                <td>${compra.id_proveedor}</td>
+                <td>${compra.id_medicamento}</td>
+                <td>${compra.cantidad}</td>
+                <td>$${compra.precio_unitario}</td>
                 <td>$${compra.total}</td>
-
+                <td>${new Date(compra.fecha).toLocaleDateString("es-AR")}</td>
                 <td ${!esAdministrador() ? 'style="display:none;"' : ""}>
                     ${acciones}
                 </td>
@@ -88,17 +90,14 @@ function mostrarCompras(compras) {
 //============================
 
 const modalCompra = new bootstrap.Modal(document.getElementById("modalCompra"));
-
 const formCompra = document.getElementById("formCompra");
-
 const btnGuardar = document.getElementById("btnGuardarCompra");
-
 const tituloModal = document.getElementById("tituloModal");
 
 let idEditar = null;
 
 //============================
-// NUEVO EMPLEADO
+// NUEVA COMPRA
 //============================
 document.getElementById("btnNuevaCompra").addEventListener("click", () => {
   idEditar = null;
@@ -116,12 +115,22 @@ btnGuardar.addEventListener("click", guardarCompra);
 
 async function guardarCompra() {
   const compra = {
-    fecha: document.getElementById("fecha").value,
-
+    id_proveedor: Number(document.getElementById("idProveedor").value),
+    id_medicamento: Number(document.getElementById("idMedicamento").value),
+    cantidad: Number(document.getElementById("cantidad").value),
+    precio_unitario: Number(document.getElementById("precioUnitario").value),
     total: Number(document.getElementById("total").value),
+    fecha: document.getElementById("fecha").value,
   };
 
-  if (!compra.fecha || !compra.total) {
+  if (
+    !compra.id_proveedor ||
+    !compra.id_medicamento ||
+    !compra.cantidad ||
+    !compra.precio_unitario ||
+    !compra.total ||
+    !compra.fecha
+  ) {
     alert("Debe completar todos los campos.");
 
     return;
@@ -168,9 +177,12 @@ async function editarCompra(id) {
 
     tituloModal.innerText = "Editar compra";
 
-    document.getElementById("fecha").value = compra.fecha;
-
+    document.getElementById("idProveedor").value = compra.id_proveedor;
+    document.getElementById("idMedicamento").value = compra.id_medicamento;
+    document.getElementById("cantidad").value = compra.cantidad;
+    document.getElementById("precioUnitario").value = compra.precio_unitario;
     document.getElementById("total").value = compra.total;
+    document.getElementById("fecha").value = compra.fecha;
 
     modalCompra.show();
   } catch (error) {
