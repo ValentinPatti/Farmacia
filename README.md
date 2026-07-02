@@ -12,6 +12,7 @@ Además, incluye un panel de administración para la gestión de productos e inv
 - CSS
 - JavaScript (ES6+)
 - Bootstrap
+- Node.js
 
 ---
 
