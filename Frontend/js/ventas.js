@@ -63,12 +63,14 @@ function mostrarVentas(ventas) {
 
     tablaVentas.innerHTML += `
       <tr>
-
-        <td>${new Date(venta.fecha).toLocaleDateString("es-AR")}</td>
-
+        <td>${venta.id_venta}</td>
+        <td>${venta.id_empleado}</td>
+        <td>${venta.id_medicamento}</td>
+        <td>${venta.cantidad}</td>
+        <td>$${venta.precio_unitario}</td>
         <td>${venta.metodo_pago}</td>
-
-        <td>$${venta.total}</td>
+        <td>$${venta.precio_total}</td>
+        <td>${new Date(venta.fecha).toLocaleDateString("es-AR")}</td>
 
         <td ${!esAdministrador() ? 'style="display:none;"' : ""}>
           ${botones}
@@ -84,11 +86,8 @@ function mostrarVentas(ventas) {
 //============================
 
 const modalVenta = new bootstrap.Modal(document.getElementById("modalVenta"));
-
 const formVenta = document.getElementById("formVenta");
-
 const btnGuardar = document.getElementById("btnGuardarVenta");
-
 const tituloModal = document.getElementById("tituloModal");
 
 let idEditar = null;
@@ -117,14 +116,24 @@ async function guardarVenta() {
   if (!esAdministrador()) return;
 
   const venta = {
-    fecha: document.getElementById("fecha").value,
-
+    id_empleado: Number(document.getElementById("idEmpleado").value),
+    id_medicamento: Number(document.getElementById("idMedicamento").value),
+    cantidad: Number(document.getElementById("cantidad").value),
+    precio_unitario: Number(document.getElementById("precioUnitario").value),
     metodo_pago: document.getElementById("metodoPago").value,
-
-    total: Number(document.getElementById("total").value),
+    precio_total: Number(document.getElementById("total").value),
+    fecha: document.getElementById("fecha").value,
   };
 
-  if (!venta.fecha || !venta.metodo_pago || !venta.total) {
+  if (
+    !venta.id_empleado ||
+    !venta.id_medicamento ||
+    !venta.cantidad ||
+    !venta.precio_unitario ||
+    !venta.metodo_pago ||
+    !venta.precio_total ||
+    !venta.fecha
+  ) {
     alert("Debe completar todos los campos.");
     return;
   }
@@ -171,11 +180,13 @@ async function editarVenta(id) {
 
     tituloModal.innerText = "Editar venta";
 
-    document.getElementById("fecha").value = venta.fecha;
-
+    document.getElementById("idEmpleado").value = venta.id_empleado;
+    document.getElementById("idMedicamento").value = venta.id_medicamento;
+    document.getElementById("cantidad").value = venta.cantidad;
+    document.getElementById("precioUnitario").value = venta.precio_unitario;
     document.getElementById("metodoPago").value = venta.metodo_pago;
-
-    document.getElementById("total").value = venta.total;
+    document.getElementById("total").value = venta.precio_total;
+    document.getElementById("fecha").value = venta.fecha;
 
     modalVenta.show();
   } catch (error) {
