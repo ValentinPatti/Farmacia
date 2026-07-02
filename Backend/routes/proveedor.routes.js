@@ -6,9 +6,9 @@ const proveedorController = require("../controllers/proveedorController.js");
 
 router.use(verificacionToken)
 
-router.post("/", verificarRol("Administrador"), proveedorController.crearProveedor);
-router.get("/", verificarRol("Administrador"), proveedorController.mostrarProveedores);
-router.patch("/:id", verificarRol("Administrador"), proveedorController.actualizarProveedor);
-router.delete("/:id", verificarRol("Administrador"), proveedorController.eliminarProveedor);
+router.post("/", verificarRol("administrador"), proveedorController.crearProveedor);
+router.get("/", verificarRol("administrador"), proveedorController.mostrarProveedores);
+router.patch("/:id", verificarRol("administrador"), proveedorController.actualizarProveedor);
+router.delete("/:id", verificarRol("administrador"), proveedorController.eliminarProveedor);
 
 module.exports = router;

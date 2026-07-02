@@ -6,10 +6,10 @@ const medicamentosController = require("../controllers/medicamentosController.js
 
 router.use(verificacionToken)
 
-router.post('/', verificarRol("Administrador"), medicamentosController.crearMedicamento)
-router.get('/', verificarRol("Administrador", "Empleado"), medicamentosController.mostrarMedicamentos)
-router.patch('/:id', verificarRol("Administrador"), medicamentosController.actualizarMedicamento)
-router.delete('/:id', verificarRol("Administrador"), medicamentosController.eliminarMedicamento)
+router.post('/', verificarRol("administrador"), medicamentosController.crearMedicamento)
+router.get('/', verificarRol("administrador", "empleado"), medicamentosController.mostrarMedicamentos)
+router.patch('/:id', verificarRol("administrador"), medicamentosController.actualizarMedicamento)
+router.delete('/:id', verificarRol("administrador"), medicamentosController.eliminarMedicamento)
 
 
 module.exports = router

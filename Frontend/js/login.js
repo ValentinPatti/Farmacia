@@ -24,6 +24,8 @@ async function iniciarSesion(e) {
             usuario, contrasena
         });
 
+        console.log("esto llega del backend: ", response)
+
         //guardo el token
         localStorage.setItem("token", response.data.token);
 

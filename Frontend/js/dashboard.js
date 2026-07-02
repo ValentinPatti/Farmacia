@@ -5,7 +5,7 @@ botonLogout.addEventListener("click", cerrarSesion)
 
 const rol = localStorage.getItem("rol")
 const nombre = localStorage.getItem("nombre")
-const tituloSaludo = localStorage.getItem("saludoUsuario")
+const tituloSaludo = document.getElementById("saludoUsuario")
 
 if (rol === "Empleado") {
     document.getElementById("empleados").style.display = "none"
