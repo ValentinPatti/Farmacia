@@ -71,7 +71,14 @@ function mostrarClientes(clientes) {
                     Eliminar
                 </button>
             `;
-
+        } else {
+            botones = `
+                <button
+                    class="btn btn-warning btn-sm"
+                    onclick="editarCliente(${cliente.id_cliente})">
+                    Editar
+                </button>
+            `;
         }
 
         tablaClientes.innerHTML += `
@@ -81,7 +88,7 @@ function mostrarClientes(clientes) {
                 <td>${cliente.nombre}</td>
                 <td>${cliente.apellido}</td>
                 <td>${cliente.telefono}</td>
-                <td ${!esAdministrador() ? 'style="display:none;"' : ""}>
+                <td>
                     ${botones}
                 </td>
             </tr>
@@ -263,7 +270,7 @@ document
 document.addEventListener("DOMContentLoaded", () => {
     cargarClientes();
     const btnNuevo = document.getElementById("btnNuevoCliente");
-    if (!esAdministrador()) {
-        btnNuevo.style.display = "none"
-    }
+    // if (!esAdministrador()) {
+    //     btnNuevo.style.display = "none"
+    // }
 });
