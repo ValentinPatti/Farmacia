@@ -18,19 +18,10 @@ Además, incluye un panel de administración para la gestión de productos e inv
 
 # ⚙️ Funcionalidades
 
-## 🧑 Funcionalidades para Usuarios
-
-### 🔍 Catálogo Dinámico
-
-- Visualización de productos
-- Búsqueda en tiempo real por:
-  - Nombre
-  - Categoría
-
 ### 📄 Detalle de Producto
 
 - Información completa del producto
-- Vista individual de cada artículo
+- Vista de cada artículo
 
 ### 🔐 Registro y Login (Simulado)
 
@@ -41,13 +32,6 @@ Además, incluye un panel de administración para la gestión de productos e inv
   - Contraseña segura
 - Persistencia de sesión mediante LocalStorage
 
-### ❤️ Lista de Deseos
-
-- Agregar productos a favoritos
-- Eliminar productos de favoritos
-- Persistencia por usuario utilizando LocalStorage
-
----
 
 ## 🛠️ Panel de Administración
 
