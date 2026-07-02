@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Sistema de gestión de farmacia" />
+    <meta name="author" content="Palacios Mateo - González Patti, Valentín" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Farmacia</title>
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    <header>
+      <nav class="navbar navbar-expand-lg bg-success">
+        <div class="container-fluid">
+          <a class="navbar-brand text-white fw-bold" href="./dashboard.html"
+            >Inicio</a
+          >
+          <button
+            class="navbar-toggler text-white"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon text-white"></span>
+          </button>
+          <div class="collapse navbar-collapse text-white" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link text-white" href="./medicamentos.html"
+                  >Medicamentos</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="./empleados.html"
+                  >Empleados</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="./proveedores.html"
+                  >Proveedores</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="./compras.html">Compras</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="./ventas.html">Ventas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="./clientes.html"
+                  >Clientes</a
+                >
+              </li>
+            </ul>
+            <div class="d-flex">
+              <button id="btnLogout" class="btn btn-danger">
+                Cerrar Sesion
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="flex-grow-1">
+      <div class="container text-center mt-5 mb-5">
+        <div class="card shadow">
+        <div
+          class="card-header bg-success text-white d-flex justify-content-between align-items-center"
+        >
+          <h3 class="mb-0">Gestión de Ventas</h3>
+          <button
+            class="btn btn-light fw-bold"
+            id="btnNuevaVenta"
+            data-bs-toggle="modal"
+            data-bs-target="#modalVenta"
+          >
+            <i class="bi bi-plus-circle"></i>
+            Nueva venta
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table
+              class="table table-striped table-hover align-middle text-center"
+            >
+              <thead class="table-success">
+                <tr>
+                  <th>Fecha</th>
+                  <th>Método de pago</th>
+                  <th>Total</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+
+              <tbody id="tablaVentas"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Crear/Editar -->
+      <div class="modal fade" id="modalVenta" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+              <h5 class="modal-title" id="tituloModal">Nueva venta</h5>
+
+              <button
+                type="button"
+                class="btn-close btn-close-white"
+                data-bs-dismiss="modal"
+              ></button>
+            </div>
+
+            <div class="modal-body">
+              <form id="formVenta">
+                <div class="mb-3">
+                  <label class="form-label">Fecha</label>
+
+                  <input type="date" class="form-control" id="fecha" />
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Método de pago</label>
+
+                  <select class="form-control" id="metodoPago">
+                    <option value="Efectivo">Efectivo</option>
+                    <option value="Tarjeta de Débito">Tarjeta de Débito</option>
+                    <option value="Tarjeta de Crédito">
+                      Tarjeta de Crédito
+                    </option>
+                    <option value="Transferencia">Transferencia</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Total</label>
+
+                  <input
+                    type="number"
+                    step="0.01"
+                    class="form-control"
+                    id="total"
+                  />
+                </div>
+              </form>
+            </div>
+
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-bs-dismiss="modal">
+                Cancelar
+              </button>
+
+              <button class="btn btn-success" id="btnGuardarVenta">
+                Guardar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Eliminar -->
+      <div class="modal fade" id="modalEliminarVenta" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+              <h5 class="modal-title">Confirmar eliminación</h5>
+
+              <button
+                class="btn-close btn-close-white"
+                data-bs-dismiss="modal"
+              ></button>
+            </div>
+
+            <div class="modal-body text-center">
+              <h5>¿Está seguro que desea eliminar este medicamento?</h5>
+
+              <p class="text-danger fw-bold">
+                Esta acción no se puede deshacer.
+              </p>
+            </div>
+
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-bs-dismiss="modal">
+                Cancelar
+              </button>
+
+              <button class="btn btn-danger" id="btnEliminarVenta">
+                Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </main>
+    <footer class="bg-success py-2">
+      <p class="text-white text-center fw-bold mb-0">
+        &copy; Diseñado por Mateo y Valentin
+      </p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.18.1/dist/axios.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/proveedores.js"></script>
+  </body>
+</html>

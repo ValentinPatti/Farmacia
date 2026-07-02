@@ -6,9 +6,9 @@ const empleadoController = require("../controllers/empleadoController.js");
 
 router.use(verificacionToken)
 
-router.post("/", verificarRol("Administrador"),empleadoController.crearEmpleado);
-router.get("/", verificarRol("Administrador"),empleadoController.mostrarEmpleados);
-router.patch("/:id", verificarRol("Administrador"),empleadoController.actualizarEmpleado);
-router.delete("/:id", verificarRol("Administrador"),empleadoController.eliminarEmpleado);
+router.post("/", verificarRol("administrador"),empleadoController.crearEmpleado);
+router.get("/", verificarRol("administrador"),empleadoController.mostrarEmpleados);
+router.patch("/:id", verificarRol("administrador"),empleadoController.actualizarEmpleado);
+router.delete("/:id", verificarRol("administrador"),empleadoController.eliminarEmpleado);
 
 module.exports = router;
