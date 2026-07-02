@@ -11,52 +11,37 @@
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../css/style.css" />
-    <title>Login - Farmacia</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Farmacia</title>
   </head>
   <body class="d-flex flex-column min-vh-100">
     <header>
       <nav class="navbar navbar-dark bg-success">
         <div class="container">
-          <span class="navbar-brand">Farmacia - Login</span>
+          <span class="navbar-brand">Sistema de Farmacia</span>
         </div>
+        <button id="btnLogout" class="btn btn-danger">Cerrar Sesion</button>
       </nav>
     </header>
     <main class="flex-grow-1">
-      <div class="container d-flex justify-content-center mt-5">
-        <div class="card p-4 shadow">
-          <h4 class="text-center mb-3">Iniciar Sesión</h4>
-          <form id="formLogin">
-              <input
-              type="text"
-              id="usuario"
-              class="form-control mb-3"
-              placeholder="Usuario"
-              minlength="3"
-              maxlength="20"
-              required
-              />
-              <input
-              type="password"
-              id="contrasena"
-              class="form-control mb-3"
-              placeholder="Contraseña"
-              minlength="5"
-              maxlength="20"
-              required
-              />
-              <button type="submit" class="btn btn-success w-100" id="boton">
-                  Ingresar
-                </button>
-                <p id="mensaje" class="text-danger text-center mt-3"></p>
-        </form>
+      <div class="container text-center mt-5 mb-5">
+        <h2 class="mb-4" id="saludoUsuario"></h2>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-4">
+                <div class="d-grid gap-3">
+                    <a href="">Medicamentos 💊</a>
+                    <a href="">Empleados </a>
+                    <a href="">Proveedores</a>
+                    <a href="">Compras</a>
+                    <a href="">Ventas</a>
+                    <a href="">Clientes</a>               
+                 </div>
+            </div>
         </div>
       </div>
     </main>
     <footer class="bg-success py-2">
-      <p class="text-white text-center fw-bold mb-0">
-        &copy; Diseñado por Mateo y Valentin
-      </p>
+        <p class="text-white text-center fw-bold mb-0">&copy; Diseñado por Mateo y Valentin</p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.18.1/dist/axios.min.js"></script>
     <script
@@ -66,6 +51,6 @@
     ></script>
     <script src="../js/api.js"></script>
     <script src="../js/auth.js"></script>
-    <script src="../js/login.js"></script>
+    <script src="../js/dashboard.js"></script>
   </body>
 </html>

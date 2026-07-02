@@ -1,0 +1,19 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.card {
+    max-width: 500px;
+    margin: auto;
+    border-radius: 15px;
+}
+
+.hover-scale {
+    transition: transform 0.3s ease, box-shadow 0.3 ease;
+}
+
+.hover-scale:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    z-index: 1;
+}
