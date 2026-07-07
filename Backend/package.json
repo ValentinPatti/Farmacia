@@ -1,13 +1,14 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Sistema de gestion de farmacia",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index",
+    "dev": "node --watch index"
   },
   "keywords": [],
-  "author": "",
+  "author": "Palacios Mateo - Gonzalez Patti Valentin",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
